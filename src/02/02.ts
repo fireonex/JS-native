@@ -14,7 +14,7 @@ type AddressType = {
     city: LocalCityType
 }
 
-type StudentType = {
+export type StudentType = {
     name: string
     age: number
     isActive: boolean
@@ -57,7 +57,6 @@ export const student: StudentType = {
             title: "HTML"
         }
     ]
-
 }
 
 console.log(student.address.city.countryTitle)
