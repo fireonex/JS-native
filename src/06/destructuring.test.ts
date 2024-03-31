@@ -41,6 +41,7 @@ test('person test', ()=> {
     // const age = props.age;
     // const lessons = props.lessons;
     const {age, lessons} = props;
+
     const {title} = props.address.street
 
     expect(age).toBe(18);

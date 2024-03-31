@@ -1,39 +1,57 @@
 import React, {useState} from "react";
 import {HumanType} from "./destructuring.test";
 
-type PropsType = {
-    title: string
-    human: HumanType
-    food: Array<string>
-    car: {model: string}
+
+// type PropsType = {
+//     title: string
+//     human: HumanType
+//     food: Array<string>
+//     car: {model: string}
+// }
+//
+// function useKataerelState(m: string) {
+//     return [m, function (){}]
+// }
+//
+// function useKataerelState2(m: string) {
+//     return {
+//         message: m,
+//         setMessage: function (){}
+//     }
+// }
+
+// export const HumanComponent: React.FC<PropsType> = ({ title, human: {name}, ...restProps }) => {
+//
+//     const [message, setMessage] = useState('hello')
+//
+//     // const restProps2 = {
+//     //     food: props.food,
+//     //     car: props.car
+//     // }
+//
+//     return <div>
+//         <h1>{title}</h1>
+//         <hr/>
+//         <div>
+//             {name}
+//             {restProps.car.model}
+//         </div>
+//     </div>
+// }
+
+
+export const obj1 = {
+    name: 'Ivan',
+    age: 30,
+    surname: 'Ivanov',
 }
 
-function useKataerelState(m: string) {
-    return [m, function (){}]
+const obj2 = {
+    country: 'Russia',
+    city: 'Moscow',
+    street: 'Great Street'
 }
 
-function useKataerelState2(m: string) {
-    return {
-        message: m,
-        setMessage: function (){}
-    }
-}
+console.log(obj2["street"])
 
-export const HumanComponent: React.FC<PropsType> = ({ title, human: {name}, ...restProps }) => {
 
-    const [message, setMessage] = useState('hello')
-
-    // const restProps2 = {
-    //     food: props.food,
-    //     car: props.car
-    // }
-
-    return <div>
-        <h1>{title}</h1>
-        <hr/>
-        <div>
-            {name}
-            {restProps.car.model}
-        </div>
-    </div>
-}
