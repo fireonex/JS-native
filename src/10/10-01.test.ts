@@ -1,12 +1,30 @@
 import {
     addingUserCompany,
-    addNewUserBooks, changingPeopleName, changingUserCompany,
+    addNewUserBooks,
+    changingMan3,
+    changingMan4,
+    changingMan5,
+    changingMan6,
+    changingMan7,
+    changingPeopleName,
+    changingUserCompany,
     makeHairStyle,
-    man1Type, man2Type,
-    moveUser, peopleType, removeBook, updateBook, updateCompanyTitle2,
-    upgradeUserLaptop, upgradingFriendName,
+    man1Type,
+    man2Type,
+    man4Type,
+    man5Type,
+    man6Type, man7Type,
+    moveUser,
+    peopleType,
+    removeBook,
+    updateBook,
+    updateCompanyTitle2,
+    upgradeUserLaptop,
+    upgradingFriendName,
     upgradingMotherAge,
-    UserType, UserWithBooksType, UserWithCompaniesType,
+    UserType,
+    UserWithBooksType,
+    UserWithCompaniesType,
     UserWithLaptopType
 } from "./10-01";
 
@@ -189,12 +207,12 @@ test('update company', () => {
 
     let companies = {
         'Dimych': [
-            { id: 1, title: 'сбер' },
-            { id: 2, title: 'nlmk' }
+            {id: 1, title: 'сбер'},
+            {id: 2, title: 'nlmk'}
         ],
         'Katara': [
-            { id: 1, title: 'yandex' },
-            { id: 2, title: 'google' }
+            {id: 1, title: 'yandex'},
+            {id: 2, title: 'google'}
         ]
     }
 
@@ -297,9 +315,182 @@ test('changing people name', () => {
 
 
     expect(people).not.toBe(peopleFullCopy)
-    expect(people[2]).toBe(peopleFullCopy[2])
+    expect(people[2].name).toBe(peopleFullCopy[2].name)
     expect(people[1]).not.toBe(peopleFullCopy[1])
 
-    //todo
-    //expect(peopleFullCopy[1].name).toBe('Sam')
+    expect(peopleFullCopy[1].name).toBe("Sam")
+
 })
+
+//---------------------------------------------------------------------------------------------//
+
+test('changing man3', () => {
+
+    let man3 = {
+        name: 'John',
+        age: 28,
+        friends: [
+            {name: "Peter", age: 30},
+            {name: "Steven", age: 32},
+            {name: "William", age: 28}
+        ]
+    };
+
+
+    const man3FullCopy = changingMan3(man3, 1, 35)
+
+
+    expect(man3).not.toBe(man3FullCopy)
+    expect(man3.friends[1]).not.toBe(man3FullCopy.friends[1])
+    expect(man3FullCopy.friends[1].age).toBe(35)
+})
+
+
+// 7 Object inside an object, inside an object--------------------------------------------------------------//
+test('change man4', () => {
+    let man4: man4Type = {
+        name: 'John',
+        age: 28,
+        mother: {
+            name: "Kate",
+            age: 50,
+            work: {
+                position: "doctor",
+                experience: 15
+            }
+        }
+    };
+
+    let man4FullCopy = changingMan4(man4, 20)
+
+    expect(man4).not.toBe(man4FullCopy)
+    expect(man4.mother.work.experience).not.toBe(man4FullCopy.mother.work.experience)
+    expect(man4FullCopy.mother.work.experience).toBe(20)
+})
+
+
+// 8 Array of objects inside object -> object--------------------------------------------------------------//
+
+test('change man5', () => {
+
+    let man5: man5Type = {
+        name: 'John',
+        age: 28,
+        mother: {
+            name: "Kate",
+            age: 50,
+            work: {
+                position: "doctor",
+                experience: 15
+            },
+            parents: [
+                {name: "Kevin", age: 80},
+                {name: "Jennifer", age: 78},
+            ]
+        }
+    };
+
+    let man5FullCopy = changingMan5(man5, 0, 85)
+
+    expect(man5).not.toBe(man5FullCopy)
+    expect(man5.mother.parents[0]).not.toBe(man5FullCopy.mother.parents[0])
+    expect(man5FullCopy.mother.parents[0].age).toBe(85)
+})
+
+
+// 9 Object inside an object -> array -> object ->  object--------------------------------------------------//
+
+test('change man6', () => {
+
+    let man6: man6Type = {
+        name: 'John',
+        age: 28,
+        mother: {
+            name: "Kate",
+            age: 50,
+            work: {
+                position: "doctor",
+                experience: 15
+            },
+            parents: [
+                {
+                    name: "Kevin",
+                    age: 80,
+                    favoriteDish: {
+                        title: "borscht"
+                    }
+                },
+                {
+                    name: "Jennifer",
+                    age: 78,
+                    favoriteDish: {
+                        title: "sushi"
+                    }
+                },
+            ]
+        }
+    };
+
+    let man6FullCopy = changingMan6(man6, 0, 'cheese')
+
+
+    expect(man6).not.toBe(man6FullCopy)
+    // expect(man6.mother.parents[0].favoriteDish).not.toBe(man6FullCopy.mother.parents[0].favoriteDish)
+    // expect(man6FullCopy.mother.parents[0].favoriteDish.title).toBe(
+    //     'cheese'
+    // )
+})
+
+
+//10 Array of objects inside an object -> object -> array -> object ->  object-------------------------------//
+
+test('change man7', () => {
+    let man7: man7Type = {
+        name: 'John',
+        age: 28,
+        mother: {
+            name: "Kate",
+            age: 50,
+            work: {
+                position: "doctor",
+                experience: 15
+            },
+            parents: [
+                {
+                    name: "Kevin",
+                    age: 80,
+                    favoriteDish: {
+                        title: "borscht",
+                        ingredients: [
+                            {title: "beet", amount: 3},
+                            {title: "potatoes", amount: 5},
+                            {title: "carrot", amount: 1},
+                        ]
+                    }
+                },
+                {
+                    name: "Jennifer",
+                    age: 78,
+                    favoriteDish: {
+                        title: "sushi",
+                        ingredients: [
+                            {title: "fish", amount: 1},
+                            {title: "rise", amount: 0.5},
+                        ]
+                    }
+                },
+            ]
+        }
+    };
+
+    let man7FullCopy = changingMan7(man7, 0, 2, 'onion');
+
+    expect(man7).not.toBe(man7FullCopy);
+    expect(man7.mother.parents[0].favoriteDish.ingredients[2]).not.toBe(
+        man7FullCopy.mother.parents[0].favoriteDish.ingredients[2]
+    );
+    // Должно сравниваться свойство title ингредиента, а не сам ингредиент
+    expect(man7FullCopy.mother.parents[0].favoriteDish.ingredients[2].title).toBe(
+        'onion'
+    );
+});

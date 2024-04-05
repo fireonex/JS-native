@@ -1,5 +1,3 @@
-
-
 export type UserType = {
     name: string;
     hair: number;
@@ -143,7 +141,8 @@ export function changingUserCompany(u: UserWithCompaniesType,
 }
 
 export function updateCompanyTitle2(companies: {
-                                    [key: string]: Array<CompaniesType> },
+                                        [key: string]: Array<CompaniesType>
+                                    },
                                     userName: string,
                                     companyId: number,
                                     newTitle: string) {
@@ -194,14 +193,172 @@ export function upgradingFriendName(man: man2Type, friendIndex: number, newFrien
 }
 
 //---------------------------------------------------------------------------------------------//
-//todo
+
+
 export type peopleType = {
     name: string
     age: number
 }
 
-export function changingPeopleName (people: Array<peopleType>, arrIndex: number, newName: string) {
+export function changingPeopleName(people: Array<peopleType>, arrIndex: number, newName: string): Array<peopleType> {
+
+    return people.map((el, index) => index === arrIndex ? {...el, name: newName} : {...el});
+
+    // Создаем копию массива, глубоко копируя каждый объект внутри
+    // let peopleCopy = people.map((person, index) => {
+    //     if (index === arrIndex) {
+    //         // Для изменяемого объекта создаем новый объект с новым именем
+    //         return { ...person, name: newName };
+    //     } else {
+    //         // Для всех остальных объектов просто создаем копию
+    //         return { ...person };
+    //     }
+    // });
+    //
+    // return peopleCopy;
+}
+
+//---------------------------------------------------------------------------------------------//
+
+export type man3Type = {
+    name: string
+    age: number
+    friends: Array<{ name: string, age: number }>
+}
+
+export function changingMan3(man: man3Type, friendIndex: number, newAge: number) {
     return {
-        ...people, ...people.map((el, index) => people[index] === el)
+        ...man, friends: man.friends.map(
+            (el, index) =>
+                index === friendIndex
+                    ? {...el, age: newAge}
+                    : el
+        )
     }
+}
+
+//---------------------------------------------------------------------------------------------//
+
+type motherType = {
+    name: string
+    age: 50
+    work: { position: string, experience: number }
+}
+
+export type man4Type = {
+    name: string
+    age: number
+    mother: motherType
+}
+
+export function changingMan4(man: man4Type, newExperience: number) {
+    return {
+        ...man, mother: {...man.mother, work: {...man.mother.work, experience: newExperience}}
+    }
+}
+
+//---------------------------------------------------------------------------------------------//
+
+type motherType2 = motherType & {
+    parents: Array<{ name: string, age: number }>
+}
+
+export type man5Type = {
+    name: string
+    age: number
+    mother: motherType2
+}
+
+export function changingMan5(man: man5Type, parentIndex: number, newParentAge: number) {
+    return {
+        ...man, mother: {
+            ...man.mother, parents: man.mother.parents.map(
+                (el, index) => index === parentIndex
+                    ? {...el, age: newParentAge}
+                    : el
+            )
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------//
+type dishType = {
+    title: string
+}
+
+type motherType3 = motherType2 & {
+    parents: Array<{
+        name: string,
+        age: number,
+        favoriteDish: dishType
+    }>
+}
+
+export type man6Type = {
+    name: string
+    age: number
+    mother: motherType3
+}
+
+export function changingMan6(man: man6Type, parentIndex: number, newParentDish: string) {
+
+    return {
+        ...man, mother: {
+            ...man.mother, parents: man.mother.parents.map(
+                (el, index) =>
+                    index === parentIndex
+                        ? {...el, favoriteDish: {title: newParentDish}}
+                        : el
+            )
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------//
+
+type dishType2 = {
+    title: string
+    ingredients: Array<{ title: string, amount: number }>
+}
+
+type motherType4 = motherType2 & {
+    parents: Array<{
+        name: string,
+        age: number,
+        favoriteDish: dishType2
+    }>
+}
+
+export type man7Type = {
+    name: string
+    age: number
+    mother: motherType4
+}
+
+export function changingMan7(man: man7Type,
+                             parentIndex: number,
+                             ingredientIndex: number,
+                             newDishIngredientTitle: string): man7Type {
+
+    return {
+        ...man,
+        mother: {
+            ...man.mother,
+            // parents: man.mother.parents.map((el, index) =>
+            //     index === parentIndex
+            //         ? {
+            //             ...el,
+            //             favoriteDish: {
+            //                 ...el.favoriteDish,
+            //                 ingredients: el.favoriteDish.ingredients.map((ing, idx) =>
+            //                     idx === ingredientIndex
+            //                         ? { ...ing, title: newDishIngredientTitle }
+            //                         : ing
+            //                 )
+            //             }
+            //         }
+            //         : el
+            // )
+        }
+    };
 }
